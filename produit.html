@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canal+ - Produits d'Investissement</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; font-family: 'Helvetica Neue', Arial, sans-serif; }
+        body { margin: 0; background-color: #f4f4f4; color: #000; padding-bottom: 80px; }
+
+        .hero-header {
+            background-color: #000;
+            color: #fff;
+            padding: 30px 20px 60px;
+            text-align: center;
+            position: relative;
+        }
+        .hero-header h1 { margin: 0; font-size: 28px; letter-spacing: 2px; text-transform: uppercase; }
+
+        .counter-section {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 0 20px;
+            margin-top: -40px;
+            position: relative;
+            z-index: 10;
+        }
+        .counter-box {
+            background: #fff;
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            text-decoration: none;
+            color: #000;
+        }
+
+        .product-list { padding: 20px; }
+
+        .vip-card {
+            background: #fff;
+            border-radius: 12px;
+            border: 1px solid #eee;
+            margin-bottom: 20px;
+            display: flex;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .vip-infos { flex: 1; padding: 15px; }
+        .vip-title { font-size: 15px; font-weight: bold; margin-bottom: 10px; }
+        .vip-data { font-size: 12px; color: #333; line-height: 1.5; }
+        .vip-data div { display: flex; justify-content: space-between; margin-bottom: 3px; }
+
+        .vip-action {
+            width: 110px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-left: 1px solid #eee;
+        }
+        .vip-image {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+        .btn-buy {
+            background-color: #000;
+            color: #fff;
+            border: none;
+            width: 100%;
+            padding: 8px 0;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 11px;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+        .btn-buy:disabled { background-color: #666; cursor: not-allowed; }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: #fff;
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0;
+            border-top: 1px solid #ddd;
+        }
+        .nav-item { text-decoration: none; color: #888; text-align: center; font-size: 11px; }
+        .nav-item.active { color: #000; font-weight: bold; }
+        .nav-icon { font-size: 22px; display: block; margin-bottom: 4px; }
+    </style>
+</head>
+<body>
+
+    <div class="hero-header">
+        <h1>CANAL+</h1>
+    </div>
+
+    <div class="counter-section">
+        <a href="mes-produits.html" class="counter-box"><strong id="prodCount">0</strong><span>Mon produit <i class="fas fa-chevron-right"></i></span></a>
+        <a href="mes-produits.html" class="counter-box"><strong id="totalEarn">FC 0</strong><span>Mes revenus <i class="fas fa-chevron-right"></i></span></a>
+    </div>
+
+    <div class="product-list">
+        <div class="vip-card">
+            <div class="vip-infos">
+                <div class="vip-title">VIP1 Canal+ Start</div>
+                <div class="vip-data">
+                    <div><span>Prix:</span> <b>FC 15,000</b></div>
+                    <div><span>Quotidien:</span> <b>FC 4,500</b></div>
+                    <div><span>Total:</span> <b>FC 405,000</b></div>
+                </div>
+            </div>
+            <div class="vip-action">
+                <img src="IMG_4073.jpeg" class="vip-image">
+                <button class="btn-buy" onclick="buyProduct('VIP1 Canal+ Start', 15000, 4500)">Acheter</button>
+            </div>
+        </div>
+
+        <div class="vip-card">
+            <div class="vip-infos">
+                <div class="vip-title">VIP2 Canal+ Basic</div>
+                <div class="vip-data">
+                    <div><span>Prix:</span> <b>FC 30,000</b></div>
+                    <div><span>Quotidien:</span> <b>FC 9,300</b></div>
+                    <div><span>Total:</span> <b>FC 837,000</b></div>
+                </div>
+            </div>
+            <div class="vip-action">
+                <img src="IMG_4074.jpeg" class="vip-image">
+                <button class="btn-buy" onclick="buyProduct('VIP2 Canal+ Basic', 30000, 9300)">Acheter</button>
+            </div>
+        </div>
+
+        <div class="vip-card">
+            <div class="vip-infos">
+                <div class="vip-title">VIP3 Canal+ Medium</div>
+                <div class="vip-data">
+                    <div><span>Prix:</span> <b>FC 60,000</b></div>
+                    <div><span>Quotidien:</span> <b>FC 19,200</b></div>
+                    <div><span>Total:</span> <b>FC 1,728,000</b></div>
+                </div>
+            </div>
+            <div class="vip-action">
+                <img src="IMG_4075.jpeg" class="vip-image">
+                <button class="btn-buy" onclick="buyProduct('VIP3 Canal+ Medium', 60000, 19200)">Acheter</button>
+            </div>
+        </div>
+
+        <div class="vip-card">
+            <div class="vip-infos">
+                <div class="vip-title">VIP4 Canal+ Pro</div>
+                <div class="vip-data">
+                    <div><span>Prix:</span> <b>FC 120,000</b></div>
+                    <div><span>Quotidien:</span> <b>FC 39,600</b></div>
+                    <div><span>Total:</span> <b>FC 3,564,000</b></div>
+                </div>
+            </div>
+            <div class="vip-action">
+                <img src="IMG_4076.jpeg" class="vip-image">
+                <button class="btn-buy" onclick="buyProduct('VIP4 Canal+ Pro', 120000, 39600)">Acheter</button>
+            </div>
+        </div>
+
+        <div class="vip-card">
+            <div class="vip-infos">
+                <div class="vip-title">VIP5 Canal+ Elite</div>
+                <div class="vip-data">
+                    <div><span>Prix:</span> <b>FC 250,000</b></div>
+                    <div><span>Quotidien:</span> <b>FC 85,000</b></div>
+                    <div><span>Total:</span> <b>FC 7,650,000</b></div>
+                </div>
+            </div>
+            <div class="vip-action">
+                <img src="IMG_4077.jpeg" class="vip-image">
+                <button class="btn-buy" onclick="buyProduct('VIP5 Canal+ Elite', 250000, 85000)">Acheter</button>
+            </div>
+        </div>
+
+        <div class="vip-card">
+            <div class="vip-infos">
+                <div class="vip-title">VIP6 Canal+ Business</div>
+                <div class="vip-data">
+                    <div><span>Prix:</span> <b>FC 450,000</b></div>
+                    <div><span>Quotidien:</span> <b>FC 157,500</b></div>
+                    <div><span>Total:</span> <b>FC 14,175,000</b></div>
+                </div>
+            </div>
+            <div class="vip-action">
+                <img src="IMG_4078.jpeg" class="vip-image">
+                <button class="btn-buy" onclick="buyProduct('VIP6 Canal+ Business', 450000, 157500)">Acheter</button>
+            </div>
+        </div>
+
+        <div class="vip-card">
+            <div class="vip-infos">
+                <div class="vip-title">VIP7 Canal+ Master</div>
+                <div class="vip-data">
+                    <div><span>Prix:</span> <b>FC 1,000,000</b></div>
+                    <div><span>Quotidien:</span> <b>FC 360,000</b></div>
+                    <div><span>Total:</span> <b>FC 32,400,000</b></div>
+                </div>
+            </div>
+            <div class="vip-action">
+                <img src="IMG_4079.jpeg" class="vip-image">
+                <button class="btn-buy" onclick="buyProduct('VIP7 Canal+ Master', 1000000, 360000)">Acheter</button>
+            </div>
+        </div>
+
+        <div class="vip-card">
+            <div class="vip-infos">
+                <div class="vip-title">VIP8 Canal+ Ultimate</div>
+                <div class="vip-data">
+                    <div><span>Prix:</span> <b>FC 2,000,000</b></div>
+                    <div><span>Quotidien:</span> <b>FC 800,000</b></div>
+                    <div><span>Total:</span> <b>FC 72,000,000</b></div>
+                </div>
+            </div>
+            <div class="vip-action">
+                <img src="IMG_4081.jpeg" class="vip-image">
+                <button class="btn-buy" onclick="buyProduct('VIP8 Canal+ Ultimate', 2000000, 800000)">Acheter</button>
+            </div>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="dashboard.html" class="nav-item"><i class="fas fa-home nav-icon"></i>Accueil</a>
+        <a href="produit.html" class="nav-item active"><i class="fas fa-box nav-icon"></i>Produit</a>
+        <a href="equipe.html" class="nav-item"><i class="fas fa-users nav-icon"></i>Équipe</a>
+        <a href="profil.html" class="nav-item"><i class="fas fa-user nav-icon"></i>Moi</a>
+    </nav>
+
+    <script>
+        const dbUrl = "https://canal-e4274-default-rtdb.firebaseio.com/users";
+        const userPhone = localStorage.getItem('userPhone');
+
+        if (!userPhone) { window.location.href = 'index.html'; }
+
+        async function buyProduct(name, price, daily) {
+            try {
+                const response = await fetch(`${dbUrl}.json`);
+                const users = await response.json();
+                
+                let userId = null;
+                let currentUser = null;
+
+                for (let id in users) {
+                    if (users[id].phone === userPhone) {
+                        userId = id;
+                        currentUser = users[id];
+                        break;
+                    }
+                }
+
+                if (currentUser) {
+                    const currentBalance = currentUser.balance || 0;
+
+                    if (currentBalance < price) {
+                        alert("Solde insuffisant ! Veuillez recharger votre compte.");
+                    } else {
+                        const newBalance = currentBalance - price;
+                        
+                        // Enregistrement de l'achat et mise à jour solde
+                        const updateData = {
+                            balance: newBalance,
+                            hasPurchased: true // Pour débloquer le retrait
+                        };
+
+                        // Ajouter aux produits achetés
+                        const purchaseInfo = {
+                            name: name,
+                            price: price,
+                            dailyIncome: daily,
+                            purchaseDate: new Date().toISOString()
+                        };
+
+                        // Mise à jour sur Firebase
+                        await fetch(`${dbUrl}/${userId}.json`, {
+                            method: 'PATCH',
+                            body: JSON.stringify(updateData)
+                        });
+
+                        // Créer une sous-collection pour les produits de l'utilisateur
+                        await fetch(`https://canal-e4274-default-rtdb.firebaseio.com/purchases/${userId}.json`, {
+                            method: 'POST',
+                            body: JSON.stringify(purchaseInfo)
+                        });
+
+                        alert("Achat réussi ! Votre VIP est maintenant actif.");
+                        location.reload();
+                    }
+                }
+            } catch (error) {
+                alert("Erreur lors de la transaction. Vérifiez votre connexion.");
+            }
+        }
+
+        // Charger les compteurs en haut
+        async function loadCounters() {
+            try {
+                const response = await fetch(`${dbUrl}.json`);
+                const users = await response.json();
+                let userId = null;
+                let currentUser = null;
+
+                for (let id in users) {
+                    if (users[id].phone === userPhone) {
+                        userId = id;
+                        currentUser = users[id];
+                        break;
+                    }
+                }
+
+                if (userId) {
+                    const prodRes = await fetch(`https://canal-e4274-default-rtdb.firebaseio.com/purchases/${userId}.json`);
+                    const products = await prodRes.json();
+                    const count = products ? Object.keys(products).length : 0;
+                    
+                    document.getElementById('prodCount').innerText = count;
+                    document.getElementById('totalEarn').innerText = "FC " + (currentUser.earnings || 0).toLocaleString();
+                }
+            } catch (e) { console.log(e); }
+        }
+
+        loadCounters();
+    </script>
+</body>
+</html>
