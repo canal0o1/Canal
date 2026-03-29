@@ -66,7 +66,7 @@
                 <label>Montant à retirer</label>
                 <div class="input-wrapper">
                     <span>FC</span>
-                    <input type="number" id="withdrawAmount" placeholder="Min. 7500" oninput="calculateFees()">
+                    <input type="number" id="withdrawAmount" placeholder="Min. 2500" oninput="calculateFees()">
                 </div>
             </div>
 
@@ -79,7 +79,7 @@
             </div>
 
             <div class="info-calcul">
-                <div><span>Frais de retrait (15%) :</span> <span id="feeLabel">0 FC</span></div>
+                <div><span>Frais de retrait (20%) :</span> <span id="feeLabel">0 FC</span></div>
                 <div><strong style="color:#000;">Montant net à recevoir :</strong> <strong id="netLabel" style="color:#000;">0 FC</strong></div>
             </div>
 
@@ -94,8 +94,8 @@
             <h3>Conditions de retrait</h3>
             <ul>
                 <li><strong>Obligation :</strong> Avoir au moins un investissement (VIP) actif.</li>
-                <li>Montant minimum de retrait : <strong>7,500 FC</strong>.</li>
-                <li>Frais de service : <strong>15%</strong> (Inclus maintenance).</li>
+                <li>Montant minimum de retrait : <strong>2,500 FC</strong>.</li>
+                <li>Frais de service : <strong>20%</strong> (Inclus maintenance).</li>
                 <li><strong>Limite :</strong> Un seul retrait autorisé par 24 heures.</li>
                 <li>Traitement : 4h à 24h.</li>
             </ul>
@@ -125,7 +125,7 @@
 
         function calculateFees() {
             const amount = parseFloat(document.getElementById('withdrawAmount').value) || 0;
-            const fee = amount * 0.15;
+            const fee = amount * 0.20; // Modification 20%
             const net = amount - fee;
             document.getElementById('feeLabel').innerText = Math.floor(fee).toLocaleString() + " FC";
             document.getElementById('netLabel').innerText = (net > 0 ? Math.floor(net) : 0).toLocaleString() + " FC";
@@ -145,12 +145,12 @@
                 return;
             }
 
-            // 2. Vérification solde et minimum
-            if (isNaN(amount) || amount < 7500) { alert("Minimum de retrait : 7,500 FC"); return; }
+            // 2. Vérification solde et minimum (Minimum 2500)
+            if (isNaN(amount) || amount < 2500) { alert("Minimum de retrait : 2,500 FC"); return; }
             if (amount > currentBalance) { alert("Solde insuffisant."); return; }
             if (receiver.length < 9) { alert("Numéro de réception invalide."); return; }
 
-            // 3. Vérification un seul retrait par jour (Logiciel)
+            // 3. Vérification un seul retrait par jour
             const lastWithdraw = localStorage.getItem('lastWithdrawDate');
             const today = new Date().toDateString();
             if (lastWithdraw === today) {
@@ -169,11 +169,11 @@
                     body: JSON.stringify({ balance: newBalance })
                 });
 
-                // Enregistrer la demande pour l'admin
+                // Enregistrer la demande (Calcul 20%)
                 const request = {
                     user: userPhone,
                     amount: amount,
-                    netAmount: amount * 0.85,
+                    netAmount: amount * 0.80, // Net 80%
                     receiver: receiver,
                     date: new Date().toLocaleString(),
                     status: "En attente"
