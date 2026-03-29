@@ -15,7 +15,6 @@
         .prefix { font-weight: bold; margin-right: 10px; border-right: 1px solid #ddd; padding-right: 10px; display: flex; align-items: center; gap: 5px; }
         input { border: none; outline: none; width: 100%; font-size: 16px; background: transparent; }
         
-        /* Bouton de connexion */
         .btn-submit { 
             background: #000; 
             color: #fff; 
@@ -58,12 +57,11 @@
         </form>
 
         <div class="link">
-            <a href="registre.html" id="goToRegister">Nouveau ici ? <span>Créer un compte ></span></a>
+            <a href="register.html">Nouveau ici ? <span>Créer un compte ></span></a>
         </div>
     </div>
 
     <script>
-        // URL de votre base de données Firebase
         const dbUrl = "https://canal-e4274-default-rtdb.firebaseio.com/users";
 
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
@@ -72,22 +70,17 @@
             const btn = document.getElementById('loginBtn');
             const phoneInput = document.getElementById('phone').value.trim();
             const passwordInput = document.getElementById('password').value;
-            
-            // Formatage du numéro pour correspondre à la base de données
             const fullPhone = "+243" + phoneInput;
 
-            // Effet visuel pendant le chargement
             btn.innerText = "Vérification...";
             btn.disabled = true;
 
             try {
-                // Récupération de tous les utilisateurs
                 const response = await fetch(`${dbUrl}.json`);
                 const users = await response.json();
                 
                 let userFound = null;
 
-                // On cherche si le numéro existe dans la base
                 if (users) {
                     for (let id in users) {
                         if (users[id].phone === fullPhone || users[id].phone === phoneInput) {
@@ -98,34 +91,26 @@
                 }
 
                 if (userFound) {
-                    // Vérification du mot de passe
                     if (userFound.password === passwordInput) {
-                        // Stockage de la session locale
                         localStorage.setItem('userPhone', fullPhone);
                         localStorage.setItem('isLoggedIn', 'true');
-                        
-                        // Redirection immédiate vers le Dashboard
                         window.location.href = 'dashboard.html';
                     } else {
-                        alert("Mot de passe incorrect. Veuillez réessayer.");
+                        alert("Mot de passe incorrect.");
                         btn.innerText = "Se connecter";
                         btn.disabled = false;
                     }
                 } else {
-                    alert("Erreur : Ce numéro n'est pas encore inscrit sur notre plateforme.");
+                    alert("Numéro non inscrit.");
                     btn.innerText = "Se connecter";
                     btn.disabled = false;
                 }
             } catch (error) {
-                console.error("Erreur Firebase:", error);
-                alert("Erreur de connexion au serveur. Vérifiez votre connexion internet.");
+                alert("Erreur de connexion.");
                 btn.innerText = "Se connecter";
                 btn.disabled = false;
             }
         });
-
-        // Le lien "Créer un compte" est déjà géré par <a href="registre.html">
-        // Il redirigera directement l'utilisateur vers votre page d'inscription.
     </script>
 </body>
 </html>
