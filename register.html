@@ -58,12 +58,15 @@
     <script>
         const dbUrl = "https://canal-e4274-default-rtdb.firebaseio.com/users";
 
-        // Récupération automatique du code d'invitation dans l'URL (ex: registre.html?code=ht8fth)
-        const urlParams = new URLSearchParams(window.location.search);
-        const codeFromUrl = urlParams.get('code');
-        if(codeFromUrl) {
-            document.getElementById('inviteCode').value = codeFromUrl;
-        }
+        // --- CODE AJOUTÉ : RÉCUPÉRATION ET ÉCRITURE AUTOMATIQUE DU CODE D'INVITATION ---
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const codeFromUrl = urlParams.get('code'); 
+            if (codeFromUrl) {
+                document.getElementById('inviteCode').value = codeFromUrl;
+            }
+        });
+        // ----------------------------------------------------------------------------
 
         document.getElementById('registerForm').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -73,7 +76,6 @@
             const invite = document.getElementById('inviteCode').value;
             const fullPhone = "+243" + phone;
 
-            // Validations
             if (phone.length < 9 || phone.length > 10) {
                 alert("Numéro RDC invalide (utilisez 9 chiffres après +243).");
                 return;
@@ -87,7 +89,6 @@
                 return;
             }
 
-            // Génération d'un code d'invitation unique pour le nouvel utilisateur
             const myInviteCode = Math.random().toString(36).substring(2, 8);
 
             const userData = {
@@ -95,29 +96,30 @@
                 password: password,
                 inviteCode: myInviteCode,
                 referredBy: invite,
-                balance: 7500, // Bonus d'inscription
-                date: new Array().toString()
+                balance: 7500,
+                date: new Date().toISOString()
             };
 
             try {
-                // Vérifier si le numéro existe déjà
                 const checkResponse = await fetch(`${dbUrl}.json`);
                 const users = await checkResponse.json();
-                for (let id in users) {
-                    if (users[id].phone === fullPhone) {
-                        alert("Ce numéro est déjà utilisé.");
-                        return;
+                if (users) {
+                    for (let id in users) {
+                        if (users[id].phone === fullPhone) {
+                            alert("Ce numéro est déjà utilisé.");
+                            return;
+                        }
                     }
                 }
 
-                // Inscription
                 await fetch(`${dbUrl}.json`, {
                     method: 'POST',
                     body: JSON.stringify(userData)
                 });
 
+                localStorage.setItem('userPhone', fullPhone);
                 alert("Compte créé avec succès ! Bonus de 7500 FC offert.");
-                window.location.href = 'index.html';
+                window.location.href = 'dashboard.html';
             } catch (error) {
                 alert("Erreur lors de l'inscription.");
             }
