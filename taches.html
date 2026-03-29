@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canal+ - Centre des Tâches</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; font-family: 'Helvetica Neue', Arial, sans-serif; }
+        body { margin: 0; background-color: #f8f8f8; color: #000; padding-bottom: 30px; }
+
+        .header { background: #000; color: #fff; padding: 20px; display: flex; align-items: center; gap: 15px; }
+        .header a { color: #fff; text-decoration: none; }
+        
+        .container { padding: 20px; }
+
+        /* Bannière Points */
+        .points-banner {
+            background: #000;
+            color: #fff;
+            padding: 30px 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .points-banner i { font-size: 40px; margin-bottom: 10px; color: #FFD700; }
+        .points-banner h2 { margin: 5px 0; font-size: 24px; }
+        .points-banner p { font-size: 12px; opacity: 0.7; }
+
+        /* Liste des tâches */
+        .task-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #eee;
+            margin-bottom: 15px;
+        }
+        .task-info h3 { margin: 0 0 5px; font-size: 15px; }
+        .task-info p { margin: 0; font-size: 12px; color: #666; }
+        .task-reward { font-weight: bold; color: #000; font-size: 14px; margin-top: 5px; display: block; }
+
+        .btn-claim {
+            background: #000;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-claim:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .btn-claim.done {
+            background: #27ae60;
+        }
+
+        /* Instructions */
+        .instructions {
+            margin-top: 30px;
+            font-size: 12px;
+            color: #888;
+            padding: 15px;
+            background: #fff;
+            border-radius: 10px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <a href="dashboard.html"><i class="fas fa-arrow-left"></i></a>
+        <h1>Centre des Tâches</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="points-banner">
+            <i class="fas fa-coins"></i>
+            <p>Bonus accumulé</p>
+            <h2 id="totalBonus">100 FC</h2>
+        </div>
+
+        <div class="task-card">
+            <div class="task-info">
+                <h3>Connexion Quotidienne</h3>
+                <p>Réclamez votre bonus gratuit.</p>
+                <span class="task-reward">+ 100 FC</span>
+            </div>
+            <button class="btn-claim" id="dailyBtn" onclick="claimBonus()">Récupérer</button>
+        </div>
+
+        <div class="task-card" style="opacity: 0.6;">
+            <div class="task-info">
+                <h3>Inviter un ami</h3>
+                <p>Bientôt disponible...</p>
+                <span class="task-reward">+ 500 FC</span>
+            </div>
+            <button class="btn-claim" disabled>Lier</button>
+        </div>
+
+        <div class="instructions">
+            <strong>Règles :</strong><br>
+            • Le bonus de connexion peut être réclamé une seule fois toutes les 24 heures.<br>
+            • Les fonds sont ajoutés directement à votre solde de revenus.<br>
+            • Revenez demain pour la prochaine récompense !
+        </div>
+
+    </div>
+
+    <script>
+        function claimBonus() {
+            const btn = document.getElementById('dailyBtn');
+            const total = document.getElementById('totalBonus');
+            
+            // Simulation de succès
+            btn.innerText = "Récupéré ✓";
+            btn.classList.add('done');
+            btn.disabled = true;
+            
+            alert("Félicitations ! 100 FC ont été ajoutés à votre compte.");
+            
+            // Ici, vous ajouterez plus tard la logique Firebase pour vérifier les 24h
+        }
+    </script>
+
+</body>
+</html>
