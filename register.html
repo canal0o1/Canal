@@ -58,10 +58,9 @@
     <script>
         const dbUrl = "https://canal-e4274-default-rtdb.firebaseio.com/users";
 
-        // --- CORRECTION : LECTURE DU PARAMÈTRE 'ref' DANS L'URL ---
         window.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
-            const codeFromUrl = urlParams.get('ref'); // On utilise 'ref' car c'est ce qu'il y a dans votre lien
+            const codeFromUrl = urlParams.get('ref'); 
             if (codeFromUrl) {
                 document.getElementById('inviteCode').value = codeFromUrl;
             }
@@ -90,12 +89,13 @@
 
             const myInviteCode = Math.random().toString(36).substring(2, 8);
 
+            // --- MODIFICATION DU BONUS ICI (2500 FC) ---
             const userData = {
                 phone: fullPhone,
                 password: password,
                 inviteCode: myInviteCode,
                 referredBy: invite,
-                balance: 7500,
+                balance: 2500, 
                 date: new Date().toISOString()
             };
 
@@ -117,7 +117,7 @@
                 });
 
                 localStorage.setItem('userPhone', fullPhone);
-                alert("Compte créé avec succès !");
+                alert("Compte créé avec succès ! Bonus de 2500 FC offert.");
                 window.location.href = 'dashboard.html';
             } catch (error) {
                 alert("Erreur lors de l'inscription.");
