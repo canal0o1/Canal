@@ -121,6 +121,7 @@
                     <div><span>Prix:</span> <b>FC 15,000</b></div>
                     <div><span>Quotidien:</span> <b>FC 4,500</b></div>
                     <div><span>Total:</span> <b>FC 405,000</b></div>
+                    <div><span>Durée:</span> <b>90 jours</b></div>
                 </div>
             </div>
             <div class="vip-action">
@@ -136,6 +137,7 @@
                     <div><span>Prix:</span> <b>FC 30,000</b></div>
                     <div><span>Quotidien:</span> <b>FC 9,300</b></div>
                     <div><span>Total:</span> <b>FC 837,000</b></div>
+                    <div><span>Durée:</span> <b>90 jours</b></div>
                 </div>
             </div>
             <div class="vip-action">
@@ -151,6 +153,7 @@
                     <div><span>Prix:</span> <b>FC 60,000</b></div>
                     <div><span>Quotidien:</span> <b>FC 19,200</b></div>
                     <div><span>Total:</span> <b>FC 1,728,000</b></div>
+                    <div><span>Durée:</span> <b>90 jours</b></div>
                 </div>
             </div>
             <div class="vip-action">
@@ -166,6 +169,7 @@
                     <div><span>Prix:</span> <b>FC 120,000</b></div>
                     <div><span>Quotidien:</span> <b>FC 39,600</b></div>
                     <div><span>Total:</span> <b>FC 3,564,000</b></div>
+                    <div><span>Durée:</span> <b>90 jours</b></div>
                 </div>
             </div>
             <div class="vip-action">
@@ -181,6 +185,7 @@
                     <div><span>Prix:</span> <b>FC 250,000</b></div>
                     <div><span>Quotidien:</span> <b>FC 85,000</b></div>
                     <div><span>Total:</span> <b>FC 7,650,000</b></div>
+                    <div><span>Durée:</span> <b>90 jours</b></div>
                 </div>
             </div>
             <div class="vip-action">
@@ -196,6 +201,7 @@
                     <div><span>Prix:</span> <b>FC 450,000</b></div>
                     <div><span>Quotidien:</span> <b>FC 157,500</b></div>
                     <div><span>Total:</span> <b>FC 14,175,000</b></div>
+                    <div><span>Durée:</span> <b>90 jours</b></div>
                 </div>
             </div>
             <div class="vip-action">
@@ -211,6 +217,7 @@
                     <div><span>Prix:</span> <b>FC 1,000,000</b></div>
                     <div><span>Quotidien:</span> <b>FC 360,000</b></div>
                     <div><span>Total:</span> <b>FC 32,400,000</b></div>
+                    <div><span>Durée:</span> <b>90 jours</b></div>
                 </div>
             </div>
             <div class="vip-action">
@@ -226,6 +233,7 @@
                     <div><span>Prix:</span> <b>FC 2,000,000</b></div>
                     <div><span>Quotidien:</span> <b>FC 800,000</b></div>
                     <div><span>Total:</span> <b>FC 72,000,000</b></div>
+                    <div><span>Durée:</span> <b>90 jours</b></div>
                 </div>
             </div>
             <div class="vip-action">
@@ -272,27 +280,24 @@
                     } else {
                         const newBalance = currentBalance - price;
                         
-                        // Enregistrement de l'achat et mise à jour solde
                         const updateData = {
                             balance: newBalance,
-                            hasPurchased: true // Pour débloquer le retrait
+                            hasPurchased: true 
                         };
 
-                        // Ajouter aux produits achetés
                         const purchaseInfo = {
                             name: name,
                             price: price,
                             dailyIncome: daily,
+                            duration: "90 jours",
                             purchaseDate: new Date().toISOString()
                         };
 
-                        // Mise à jour sur Firebase
                         await fetch(`${dbUrl}/${userId}.json`, {
                             method: 'PATCH',
                             body: JSON.stringify(updateData)
                         });
 
-                        // Créer une sous-collection pour les produits de l'utilisateur
                         await fetch(`https://canal-e4274-default-rtdb.firebaseio.com/purchases/${userId}.json`, {
                             method: 'POST',
                             body: JSON.stringify(purchaseInfo)
@@ -307,7 +312,6 @@
             }
         }
 
-        // Charger les compteurs en haut
         async function loadCounters() {
             try {
                 const response = await fetch(`${dbUrl}.json`);
