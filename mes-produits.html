@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canal+ - Mes Investissements</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; font-family: 'Helvetica Neue', Arial, sans-serif; }
+        body { margin: 0; background-color: #f8f8f8; color: #000; padding-bottom: 80px; }
+
+        .header { background: #000; color: #fff; padding: 20px; display: flex; align-items: center; gap: 15px; }
+        .header a { color: #fff; text-decoration: none; font-size: 20px; }
+        .header h1 { margin: 0; font-size: 18px; }
+
+        .container { 
+            padding: 40px 20px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            min-height: 70vh;
+        }
+
+        /* État vide Premium */
+        .empty-icon {
+            width: 100px;
+            height: 100px;
+            background: #f0f0f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: #ccc;
+            margin-bottom: 20px;
+            border: 2px dashed #ddd;
+        }
+
+        .empty-state h2 { margin: 0; font-size: 18px; color: #000; }
+        .empty-state p { 
+            font-size: 14px; 
+            color: #888; 
+            text-align: center; 
+            margin: 10px 0 30px; 
+            line-height: 1.5;
+        }
+
+        .btn-shop {
+            background: #000;
+            color: #fff;
+            text-decoration: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: 0.3s;
+        }
+        .btn-shop:active { transform: scale(0.95); }
+
+        /* Navigation Basse */
+        .bottom-nav {
+            position: fixed; bottom: 0; width: 100%; background: #fff;
+            display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #ddd;
+        }
+        .nav-item { text-decoration: none; color: #888; text-align: center; font-size: 11px; }
+        .nav-item.active { color: #000; font-weight: bold; }
+        .nav-icon { font-size: 20px; display: block; margin-bottom: 3px; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <a href="profil.html"><i class="fas fa-arrow-left"></i></a>
+        <h1>Mes Investissements</h1>
+    </div>
+
+    <div class="container">
+        <div class="empty-icon">
+            <i class="fas fa-box-open"></i>
+        </div>
+        
+        <div class="empty-state" style="text-align: center;">
+            <h2>Aucun produit actif</h2>
+            <p>Vous n'avez pas encore activé de plan d'investissement.<br>Commencez à générer des revenus dès maintenant.</p>
+            
+            <a href="produit.html" class="btn-shop">Aller à la boutique</a>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="dashboard.html" class="nav-item"><i class="fas fa-home nav-icon"></i>Accueil</a>
+        <a href="produit.html" class="nav-item active"><i class="fas fa-box nav-icon"></i>Produit</a>
+        <a href="equipe.html" class="nav-item"><i class="fas fa-users nav-icon"></i>Équipe</a>
+        <a href="profil.html" class="nav-item"><i class="fas fa-user nav-icon"></i>Moi</a>
+    </nav>
+
+</body>
+</html>
